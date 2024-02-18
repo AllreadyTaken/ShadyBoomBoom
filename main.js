@@ -32,7 +32,7 @@ function init() {
         uniforms: unicorns,
         fragmentShader: editor.getValue()
     });
-    geometry = new THREE.PlaneGeometry(2, 2);
+    geometry = new THREE.PlaneGeometry(16, 9);
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
@@ -51,6 +51,14 @@ externalWindow.addEventListener('click', function() {
         extRenderer.setSize(500, 500);
         newWindow.document.body.appendChild(extRenderer.domElement);
         extCam.position.z = 1;
+        newWindow.addEventListener("resize",function(){
+        extCam.aspect = newWindow.innerWidth / newWindow.innerHeight;
+        extRenderer.domElement.width = newWindow.innerWidth;
+        extRenderer.domElement.height = newWindow.innerHeight;
+        extCam.updateProjectionMatrix();
+        extRenderer.setSize(newWindow.innerWidth, newWindow.innerHeight);
+    } )
+
 
     } 
     else {
