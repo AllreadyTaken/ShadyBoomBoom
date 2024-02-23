@@ -17,35 +17,41 @@
         <div class="column is-full-mobile is-half-desktop" id="menuContainer">
             <div class="collapser">+</div>
             <div class="section">
-                <h3>Texture One</h3>
-                <p>uniform sampler2D textureOne </p>
-                <label><input type="checkbox" id="textureOneEnabled"> Enabled</label><br>
+                <h3>uniform sampler2D textureOne</h3>
+                <label><input type="checkbox" id="textureOneEnabled"> Enabled</label> 
                 <label><input type="checkbox" id="textureOneUseWebCam"> Use Webcam</label><br>
                 <input type="file" id="textureOneFileSelector">
             </div>
             <hr>
             <div class="section">
-                <h3>Texture Two</h3>
-                <p>uniform sampler2D textureTwo </p>
-                <label><input type="checkbox" id="textureTwoEnabled"> Enabled</label><br>
+                <h3>uniform sampler2D textureTwo </h3>
+                <label><input type="checkbox" id="textureTwoEnabled"> Enabled</label>
                 <label><input type="checkbox" id="textureTwoUseWebCam"> Use Webcam</label><br>
                 <input type="file" id="textureTwoFileSelector">
             </div>
             <hr>
             <div class="section">
-                <h3>Time</h3>
-                <p>uniform float iTime</p>
+                <h3>uniform float iTime</h3>
                 <label><input type="checkbox" id="timeEnabled"> Enabled</label><br>
             </div>
            <hr>
            <div class="section">
-            <button class="button is-primary is-outlined" id="externalWindow">Externalize!</button>
-           </div>
+            <h3>uniform vec3 beat</h3>
+            <label><input type="checkbox" id="beatchecker"> Enabled</label><br>
+            <p>Average of low, mid and high freq as beat.xyz</p>
         </div>
-        <div class="column is-full-mobile is-half-desktop no-padding" id="editorContainer">
-            <div  id="editorWrapper">
-            <div id="editor"></div>
         </div>
+        <div class="column is-full-mobile is-half-desktop" id="editorContainer">
+
+                <div id="fileOperationsContainer">
+                    <button class="button is-primary is-outlined" id="saveButton">Save</button>
+                    <button class="button is-primary is-outlined" id="loadButton">Load</button>
+                    <button class="button is-primary is-outlined" id="externalWindow">Externalize!</button>
+                </div>
+                <input type="text" id="filename" placeholder="MyShadyBoomBoomShader" value="MyShadyBoomBoomShader">
+                <div id="editorWrapper">
+                    <div id="editor"></div>
+                </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
