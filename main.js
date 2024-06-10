@@ -92,7 +92,7 @@ document.getElementById('loadButton').addEventListener('click', function() {
     fileSelector.click();
 });
 
-let err = null;
+err = null;
 let shaderTemp ="";
 let scene, camera, renderer, material, geometry, mesh;
 
@@ -127,6 +127,7 @@ externalWindow.addEventListener('click', function() {
         extCam = new THREE.PerspectiveCamera(75,500/ 500, 0.1, 1000);
         extRenderer =  new THREE.WebGLRenderer();
         extRenderer.setSize(500, 500);
+        extRenderer.domElement.style.overflow = 'hidden';
         newWindow.document.body.appendChild(extRenderer.domElement);
         extCam.position.z = 1;
         newWindow.addEventListener("resize",function(){
