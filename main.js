@@ -5,9 +5,10 @@ let lastBeatTime = 0;
 let updateBeat = false;
 let analyser, audiosource, audioContext = null;
 let previousPower = null; 
+let newWindow = null;
 
 let unicorns = {
-    resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight / 2) },
+    resolution: { value: newWindow!=null ? new THREE.Vector2(newWindow.innerWidth/2., newWindow.innerHeight/2.) : new THREE.Vector2(window.innerWidth, window.innerHeight / 2) },
     textureOne: { type: 't', value: null },
     textureTwo: { type: 't', value: null },
     iTime: { type: 'f', value: 0.0 },
@@ -119,8 +120,38 @@ function init() {
 
 let extRenderer, extCam = null;
 let externalWindow = document.getElementById('externalWindow');
-let newWindow = null;
 
+
+
+externalWindow.addEventListener('click', function() {
+    if (!newWindow || newWindow.closed) {
+        newWindow = window.open('', '', 'width=500,height=500');
+        newWindow.document.body.style.margin = '0'; // Remove default margin
+        newWindow.document.body.style.overflow = 'hidden'; // Hide overflow
+
+        extCam = new THREE.PerspectiveCamera(75,500/ 500, 0.1, 1000);
+        extRenderer =  new THREE.WebGLRenderer();
+        extRenderer.setSize(500, 500);
+
+        newWindow.document.body.appendChild(extRenderer.domElement);
+        extCam.position.z = 1;
+
+        newWindow.addEventListener("resize",function(){
+            extCam.aspect = newWindow.innerWidth / newWindow.innerHeight;
+            extRenderer.domElement.style.width = newWindow.innerWidth + 'px';
+            extRenderer.domElement.style.height = newWindow.innerHeight + 'px';
+            extCam.updateProjectionMatrix();
+            extRenderer.setSize(newWindow.innerWidth, newWindow.innerHeight);
+        });
+    }
+            else {
+        newWindow.close();
+        newWindow = null;
+        extCam = extRenderer = null;
+    }
+});
+//*/
+/*
 externalWindow.addEventListener('click', function() {
     if (!newWindow || newWindow.closed) {
         newWindow = window.open('', '', 'width=500,height=500');
@@ -136,7 +167,7 @@ externalWindow.addEventListener('click', function() {
         extRenderer.domElement.height = newWindow.innerHeight;
         extCam.updateProjectionMatrix();
         extRenderer.setSize(newWindow.innerWidth, newWindow.innerHeight);
-    } )
+    } ) 
 
 
     } 
@@ -145,7 +176,7 @@ externalWindow.addEventListener('click', function() {
         newWindow = null;
         extCam = extRenderer = null;
     }
-});
+}); // */
 
 function animate() {
     requestAnimationFrame(animate);
